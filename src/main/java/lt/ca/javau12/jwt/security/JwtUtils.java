@@ -1,4 +1,4 @@
-package security;
+package lt.ca.javau12.jwt.security;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
