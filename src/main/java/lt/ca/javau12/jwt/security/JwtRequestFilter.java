@@ -2,6 +2,8 @@ package lt.ca.javau12.jwt.security;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +20,9 @@ import lt.ca.javau12.jwt.services.MyUserDetailsService;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
+	private static final Logger log = LoggerFactory.getLogger(JwtRequestFilter.class);
+
+	
 	private JwtUtils jwtUtils;
 	
 	private MyUserDetailsService userDetailsService;
@@ -35,6 +40,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		
 		final String authHeader = request.getHeader("Authorization");
+		log.info(authHeader);
+		
         String jwt = null, username = null;
         
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
